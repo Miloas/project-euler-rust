@@ -2,15 +2,15 @@
 
 extern crate rand;
 
-fn _rand() -> i32 {
-  let mut r = rand::random::<i32>();
+fn _rand() -> i64 {
+  let mut r = rand::random::<i64>();
   if r < 0 {
     r = -r;
   }
   r
 }
 
-pub fn gcd(x: i32, y: i32) -> i32 {
+pub fn gcd(x: i64, y: i64) -> i64 {
   let (mut a, mut b) = if x < y {
     (y, x)
   } else {
@@ -31,7 +31,7 @@ fn gcd_spec() {
 }
 
 // (x * y) mod z
-pub fn mult_mod(x: i32, y: i32, z: i32) -> i32 {
+pub fn mult_mod(x: i64, y: i64, z: i64) -> i64 {
   let (mut a, mut b, c, mut ret) = (x, y, z, 0);
   a %= c;
   b %= c;
@@ -55,7 +55,7 @@ fn mult_mod_spec() {
 }
 
 // x^y mod z
-pub fn pow_mod(x: i32, y: i32, z: i32) -> i32 {
+pub fn pow_mod(x: i64, y: i64, z: i64) -> i64 {
   let (mut a, mut b, c, mut ret) = (x, y, z, 1);
   if b == 1 {
     return a % c
@@ -79,7 +79,7 @@ fn pow_mod_spec() {
 
 // 素性二次探测: Miller-Rabin test 的helper函数
 // http://www.matrix67.com/blog/archives/234
-fn _check(a: i32, n: i32, x: i32, t: i32) -> bool {
+fn _check(a: i64, n: i64, x: i64, t: i64) -> bool {
   let (mut ret, mut i)= (pow_mod(a, x, n), 1);
   let mut last = ret;
   while i <= t {
@@ -97,9 +97,9 @@ fn _check(a: i32, n: i32, x: i32, t: i32) -> bool {
   }
 } 
 
-pub fn miller_rabin(n: i32) -> bool {
+pub fn miller_rabin(n: i64) -> bool {
   // 测试次数
-  const TIMES: i32 = 20;
+  const TIMES: i64 = 20;
   if n < 2 {
     return false;
   }
@@ -133,7 +133,7 @@ fn miller_rabin_spec() {
 }
 
 // xjb找x的因子,但是根据数学爸爸的定理,它很快
-fn pollard_rho(n: i32) -> i32 {
+fn pollard_rho(n: i64) -> i64 {
   let (mut i, mut t, mut c) = (1, 2, 0);
   let mut a = _rand() % (n - 1) + 1;
   let mut b = a;
@@ -159,13 +159,13 @@ fn pollard_rho(n: i32) -> i32 {
 }
 
 
-pub fn find_factor(n: i32) -> Vec<i32> {
+pub fn find_factor(n: i64) -> Vec<i64> {
   let mut ret = Vec::new();
   _find_factor_helper(n, &mut ret);
   ret
 }
 
-fn _find_factor_helper(n: i32, ret: &mut Vec<i32>) {
+fn _find_factor_helper(n: i64, ret: &mut Vec<i64>) {
   if n < 2 {
     return;
   }
