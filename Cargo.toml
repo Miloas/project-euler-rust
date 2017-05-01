@@ -2,3 +2,10 @@
 name = "project-euler-rust"
 version = "0.1.0"
 authors = ["miloas <genesis.null@gmail.com>"]
+
+[dependencies]
+rand = "0.3"
+
+[lib]
+name = "lib"
+path = "src/lib/index.rs"
