@@ -99,7 +99,7 @@ fn _check(a: i64, n: i64, x: i64, t: i64) -> bool {
 
 pub fn miller_rabin(n: i64) -> bool {
   // 测试次数
-  const TIMES: i64 = 20;
+  const TIMES: i64 = 10;
   if n < 2 {
     return false;
   }
@@ -157,7 +157,6 @@ fn pollard_rho(n: i64) -> i64 {
   }
   n
 }
-
 
 pub fn find_factor(n: i64) -> Vec<i64> {
   let mut ret = Vec::new();
