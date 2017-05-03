@@ -183,3 +183,37 @@ fn find_factor_spec() {
   assert_eq!(find_factor(4), [2, 2]);
   assert_eq!(find_factor(19920809), [47, 423847]);
 }
+
+pub fn sieve(n: usize) -> Vec<bool> {
+  let mut ret = Vec::with_capacity(n);
+  for _ in 0..n { ret.push(true); }
+  ret[0] = false;
+  ret[1] = false;
+
+  let mut i = 2;
+  while i * i < n {
+    if !ret[i] {
+      i += 1;
+      continue;
+    }
+    let mut j = 2 * i;
+    while j < n {
+      ret[j] = false;
+      j += i;
+    }
+    i += 1;
+  }
+  ret
+}
+
+pub fn primes(n: i32) -> Vec<i64> {
+  let m = n * ((n as f64).ln() as i32) + n * ((n as f64).ln().ln() as i32); 
+  let mut ret = Vec::new();
+  let xs = sieve(m as usize);
+  for (i, x) in xs.iter().enumerate() {
+    if *x {
+      ret.push(i as i64)
+    }
+  }
+  ret
+}

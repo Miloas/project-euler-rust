@@ -1,7 +1,7 @@
 mod solver;
 
-use solver::p006;
+use solver::p008;
 
 fn main() {
-  println!("{}", p006::solve(100));
+  println!("{}", p008::solve(13));
 }
