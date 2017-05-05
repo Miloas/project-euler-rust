@@ -207,7 +207,7 @@ pub fn sieve(n: usize) -> Vec<bool> {
 }
 
 pub fn primes(n: i32) -> Vec<i64> {
-  let m = n * ((n as f64).ln() as i32) + n * ((n as f64).ln().ln() as i32); 
+  let m = if n < 25 { 16 } else { n * ((n as f64).ln() as i32) + 2 * n * ((n as f64).ln().ln() as i32) }; 
   let mut ret = Vec::new();
   let xs = sieve(m as usize);
   for (i, x) in xs.iter().enumerate() {
