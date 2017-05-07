@@ -1,7 +1,7 @@
 mod solver;
 
-use solver::p010;
+use solver::p011;
 
 fn main() {
-  println!("{}", p010::solve(2000000));
+  println!("{}", p011::solve());
 }
